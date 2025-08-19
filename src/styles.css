@@ -1,0 +1,183 @@
+/* FONT */
+@font-face {
+  font-family: "Satoshi";
+  src: local("Satoshi"), url("https://fonts.cdnfonts.com/s/90057/Satoshi-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* VARIABLES */
+:root {
+  --primary: #ff4937;
+  --primary-dark: #d93629;
+  --background: #ffffff;
+  --text-light: #0d0d0d;
+  --text-muted: #555555;
+}
+
+/* RESET & BASE */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text-light);
+  font-family: "Satoshi", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* LINKS & BUTTONS */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color .2s;
+}
+a:hover { color: var(--primary-dark); }
+
+button { font-family: inherit; }
+.btn {
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+.btn-outline:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* NAVIGATION */
+nav {
+  position: fixed;
+  inset: 0 auto auto 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.95);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  z-index: 99;
+}
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .4px; color: var(--primary); }
+.logo img { width: 28px; height: 28px; }
+.navlinks { display: flex; gap: 20px; }
+
+/* SECTIONS */
+.section {
+  min-height: 100vh;
+  padding: 110px 24px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.h1 {
+  font-size: clamp(42px, 6vw, 84px);
+  letter-spacing: -1.2px;
+  line-height: 1.05;
+  margin: 0 0 18px;
+  color: var(--primary);
+}
+.pxl {
+  font-size: clamp(16px, 1.6vw, 20px);
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* GRID & CARD */
+.grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(12, 1fr);
+}
+.card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0,0,0,.15);
+}
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 22px;
+}
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; }
+}
+.cta-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+
+/* BADGE */
+.badge {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--primary);
+  background: rgba(255, 73, 55, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+}
+
+/* FOOTER */
+.footer {
+  padding: 40px 24px;
+  border-top: 1px solid rgba(0,0,0,.08);
+  background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,0));
+}
+
+/* CURSOR */
+.cursor {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 200;
+}
+.cursor .dot, .cursor .ring {
+  position: absolute;
+  top: 0; left: 0;
+  will-change: transform;
+  border-radius: 50%;
+}
+.cursor .dot {
+  width: 6px;
+  height: 6px;
+  background: black;
+  mix-blend-mode: difference;
+}
+.cursor .ring {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(0,0,0,.3);
+  transform: translate(-50%,-50%);
+}
+
+/* NOISE OVERLAY */
+.noise {
+  position: fixed;
+  inset: -50px;
+  pointer-events: none;
+  z-index: 2;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 0 .05'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: .15;
+  mix-blend-mode: soft-light;
+  animation: n 12s linear infinite;
+}
+@keyframes n { from { transform: translate3d(0,0,0); } to { transform: translate3d(-140px,-140px,0); } }
