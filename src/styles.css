@@ -144,6 +144,17 @@ nav {
     padding: 14px 0;         /* adjust vertical padding */
   }
 }
+@media (max-width: 768px) {
+  .cta-row {
+    justify-content: center; /* center buttons on tablets */
+  }
+
+  .cta-row .btn,
+  .cta-row .btn-outline {
+    min-width: 180px;        /* keep them a good size */
+  }
+}
+
 /* BADGE */
 .badge {
   font-size: 12px;
