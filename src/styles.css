@@ -122,46 +122,65 @@ nav {
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; }
 }
-/* CTA row base */
+/* ---------- CTA row (robust/responsive) ---------- */
 .cta-row {
   display: flex;
-  flex-wrap: wrap;       /* allows wrapping if needed */
-  gap: 16px;             /* spacing between buttons */
+  flex-wrap: wrap;        /* allow wrapping, no overlap */
+  gap: 14px;              /* consistent spacing */
   align-items: center;
   justify-content: flex-start;
+  margin-top: 18px;
+  position: relative;     /* keep children stacking contexts local */
+  z-index: 1;
 }
 
-/* Desktop / large screens */
-@media (min-width: 481px) {
-  .cta-row .btn,
-  .cta-row .btn-outline {
-    width: auto;         /* auto width for inline buttons */
-  }
+/* Buttons default (desktop) */
+.cta-row .btn,
+.cta-row .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;      /* prevents too-small buttons on big screens */
+  padding: 12px 20px;
+  box-sizing: border-box;
+  position: relative;    /* prevents absolute positioning from Magnetic leaking out */
+  z-index: 2;            /* above any decorative elements */
+  overflow: visible;     /* allow rounded corners to render */
 }
 
-/* Mobile / small screens */
+/* Mobile / small phones - full width stacked buttons */
 @media (max-width: 480px) {
   .cta-row {
-    flex-direction: column; /* stack vertically */
-    align-items: stretch;   /* full width buttons */
-    gap: 14px;
+    flex-direction: column;
+    align-items: stretch;  /* stretch buttons to full width of parent */
+    gap: 12px;
   }
 
   .cta-row .btn,
   .cta-row .btn-outline {
-    width: 100%;            /* full width buttons */
-    max-width: 100%;        /* ensure no overflow */
-    text-align: center;
-    padding: 14px 0;        /* balanced vertical padding */
-    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 14px 0;
   }
 }
 
-/* Extra-large phones fix (like iPhone 15 Pro Max) */
-@media (min-width: 430px) and (max-width: 900px) {
-  .cta-row {
-    justify-content: center;  /* center buttons on medium devices */
-  }
+/* Ensure the hero card doesn't clip the buttons (important) */
+.hero .card,
+.card {
+  overflow: visible; /* allow shadows/rounded edges and magnetic transforms to show */
+}
+
+/* If you want the outline button to sit visually below the primary with space */
+.cta-row .btn.btn-outline {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+/* Defensive: prevent transforms from breaking layout if Magnetic uses them */
+.magnetic-wrap, .cta-row > * {
+  display: inline-block;
+  position: relative;
 }
 
 
