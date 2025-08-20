@@ -122,8 +122,28 @@ nav {
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; }
 }
-.cta-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+.cta-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap; /* allows buttons to wrap */
+  margin-top: 18px;
+  justify-content: flex-start; /* align left on desktop */
+}
+@media (max-width: 480px) {
+  .cta-row {
+    flex-direction: column; /* stack vertically */
+    gap: 12px;              /* spacing between buttons */
+    align-items: stretch;    /* make buttons full width */
+  }
 
+  .cta-row .btn,
+  .cta-row .btn-outline {
+    width: 100%;             /* full width buttons */
+    text-align: center;
+    padding: 14px 0;         /* adjust vertical padding */
+  }
+}
 /* BADGE */
 .badge {
   font-size: 12px;
