@@ -122,38 +122,48 @@ nav {
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; }
 }
+/* CTA row base */
 .cta-row {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;       /* allows wrapping if needed */
+  gap: 16px;             /* spacing between buttons */
   align-items: center;
-  flex-wrap: wrap; /* allows buttons to wrap */
-  margin-top: 18px;
-  justify-content: flex-start; /* align left on desktop */
+  justify-content: flex-start;
 }
+
+/* Desktop / large screens */
+@media (min-width: 481px) {
+  .cta-row .btn,
+  .cta-row .btn-outline {
+    width: auto;         /* auto width for inline buttons */
+  }
+}
+
+/* Mobile / small screens */
 @media (max-width: 480px) {
   .cta-row {
     flex-direction: column; /* stack vertically */
-    gap: 12px;              /* spacing between buttons */
-    align-items: stretch;    /* make buttons full width */
+    align-items: stretch;   /* full width buttons */
+    gap: 14px;
   }
 
   .cta-row .btn,
   .cta-row .btn-outline {
-    width: 100%;             /* full width buttons */
+    width: 100%;            /* full width buttons */
+    max-width: 100%;        /* ensure no overflow */
     text-align: center;
-    padding: 14px 0;         /* adjust vertical padding */
+    padding: 14px 0;        /* balanced vertical padding */
+    box-sizing: border-box;
   }
 }
-@media (max-width: 768px) {
-  .cta-row {
-    justify-content: center; /* center buttons on tablets */
-  }
 
-  .cta-row .btn,
-  .cta-row .btn-outline {
-    min-width: 180px;        /* keep them a good size */
+/* Extra-large phones fix (like iPhone 15 Pro Max) */
+@media (min-width: 430px) and (max-width: 900px) {
+  .cta-row {
+    justify-content: center;  /* center buttons on medium devices */
   }
 }
+
 
 /* BADGE */
 .badge {
